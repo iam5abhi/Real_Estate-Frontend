@@ -6,9 +6,9 @@ import Dashboard from '../../Pages/Admin/Dashboard/Dashboard';
 // import Question from '../../Pages/Admin/Question';
 import AdminPrivateRoute from '../../Middleware/Private Route/AdminPrivateRoute'
 import AdminChangePass from '../../Pages/Change-Password/AdminChangePass';
+import Merchant from '../../Components/Admin/Merchant/Merchant';
 // import Category from "../../Components/Admin/Category/Category"
 // import Mentors from '../../Components/Admin/Mentor/Mentors';
-// import Students from '../../Components/Admin/Student/Students'
 // import Campus from "../../Components/Admin/Campus/Campus"
 // import Enterprises from '../../Components/Admin/Enterprises/Enterprises'
 // import Projects from "../../Pages/Admin/Admin Upload Project/Projects"
@@ -25,6 +25,14 @@ const AdminRouting = () => {
       path: '/',
       component: Dashboard,
     },
+    {
+      path:'merchants',
+      component: Merchant,
+    },
+    {
+      path:'change-password',
+      component:AdminChangePass
+    }
   //   {
   //     path: 'questions',
   //     component: Question,
@@ -36,10 +44,6 @@ const AdminRouting = () => {
   //   {
   //     path:'mentors',
   //     component:Mentors
-  //   },
-  //   {
-  //     path:'students',
-  //     component:Students
   //   },
   //   {
   //     path:'enterprises',
@@ -69,10 +73,6 @@ const AdminRouting = () => {
   //     path:'assignment',
   //     component:AssignmentRequests
   //   },
-    {
-      path:'change-password',
-      component:AdminChangePass
-    }
   ]
 
   return (

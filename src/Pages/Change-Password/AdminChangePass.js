@@ -15,7 +15,8 @@ const AdminChangePass = () => {
         }))
     }
     
-    const ChangePassSubmitHandler =async()=>{
+    const ChangePassSubmitHandler =async(event)=>{
+        event.preventDefault();
         let encoded_old_password = base64_encode(changePass.old_password);
         let encoded_new_password = base64_encode(changePass.new_password);
         let encoded_new_confirmpassword = base64_encode(changePass.new_confirmpassword);
@@ -40,7 +41,7 @@ const AdminChangePass = () => {
         <>
         <AdminHeader />
         <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8 ">
-            <div className="w-full max-w-md space-y-8 shadow-2xl rounded-lg px-5 py-5 bg-white">
+            <form onSubmit={ChangePassSubmitHandler} className="w-full max-w-md space-y-8 shadow-2xl rounded-lg px-5 py-5 bg-white">
                 <div>
                 <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">Change Password</h2>
                 </div>
@@ -62,10 +63,10 @@ const AdminChangePass = () => {
                     :
                     <Message message={message.message} css='flex p-4 mb-4 text-sm text-green-700 bg-green-100 rounded-lg dark:bg-gray-800 dark:text-green-400' />
                     :null}
-                    <button type="button" onClick={ChangePassSubmitHandler} className="group relative flex w-full justify-center rounded-md border border-transparent bg-orange-600 py-2 px-4 text-sm font-medium text-white hover:bg-orange-400 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2">
+                    <button type="submit" className="group relative flex w-full justify-center rounded-md border border-transparent bg-orange-600 py-2 px-4 text-sm font-medium text-white hover:bg-orange-400 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2">
                         Update Password
                     </button>
-            </div>
+            </form>
         </div>
         
     </>

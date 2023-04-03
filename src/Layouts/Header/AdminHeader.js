@@ -17,10 +17,10 @@ function classNames(...classes) {
 const AdminHeader = () => {
   const PageRoutes = [
     {
-      name:"Dashboard",
-      to:"/auth/admin"
+      name:"Merchant",
+      to:"/auth/admin/merchants"
     }
-  ]
+  ] 
   
   const navigate = useNavigate()
   const [message, setMessage] = useState({ message:'', type:false })
