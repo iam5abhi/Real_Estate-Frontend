@@ -2,13 +2,10 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Message from '../../features/Message'
 import {encode as base64_encode} from 'base-64';
-import { Token } from '../../features/Token'
 import { authFetch } from '../../Middleware/axios/intance';
-import jwtDecode from 'jwt-decode';
 
 const ChangePassword = () => {
     const navigate=useNavigate() 
-    let decodeData = jwtDecode(Token())
     const [changePass,setChangePass]=useState({ old_password:'', new_password:'', new_confirmpassword:'' })
     const [message,setMessage]=useState({message:'',type:''})
 
@@ -19,37 +16,33 @@ const ChangePassword = () => {
         }))
     }
     
-    const ChangePassSubmitHandler =async()=>{
-        if(decodeData.user){
-            let encoded_old_password = base64_encode(changePass.old_password);
+    const ChangePassSubmitHandler =async(event)=>{
+        event.preventDefault()
+        let encoded_old_password = base64_encode(changePass.old_password);
         let encoded_new_password = base64_encode(changePass.new_password);
         let encoded_new_confirmpassword = base64_encode(changePass.new_confirmpassword);
-        let url = decodeData.user.role=="mentor"?'/api/mentor/change-password':decodeData.user.role=="enterpricess"?'/api/enterpricess/change-password':
-        decodeData.user.role=="student"?'/api/student/change-password':decodeData.user.role=="campus"?'/api/campus/change-password':null
-            
-            try {
-                const resp =await authFetch.patch(url,{old_password:encoded_old_password,
-                new_password:encoded_new_password,new_confirmpassword:encoded_new_confirmpassword});
-                localStorage.removeItem('token')
-                setMessage({message:resp.data.message,type:true})
-                localStorage.setItem('token',resp.data.token,true)
-                setTimeout(() => {
-                navigate(`/auth/${decodeData.user.role}`)
+        try {
+            const resp =await authFetch.patch('/api/merchant/change-password',{old_password:encoded_old_password,
+            new_password:encoded_new_password,new_confirmpassword:encoded_new_confirmpassword});
+            localStorage.removeItem('token')
+            setMessage({message:resp.data.message,type:true})
+            localStorage.setItem('token',resp.data.token,true)
+            setTimeout(() => {
+            navigate(`/auth/marchant`)
+            setMessage({message:'',type:''})
+            },2000);
+            } catch (error){
+            setMessage({message:error,type:false})
+            setTimeout(() => {
                 setMessage({message:'',type:''})
-                },2000);
-              } catch (error){
-                setMessage({message:error,type:false})
-                setTimeout(() => {
-                  setMessage({message:'',type:''})
-                },2000);
-              }
+            },2000);
         }
     }
 
   return (
         <>
         <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8 ">
-            <div className="w-full max-w-md space-y-8 shadow-2xl rounded-lg px-5 py-5 bg-white">
+            <form onSubmit={ChangePassSubmitHandler} className="w-full max-w-md space-y-8 shadow-2xl rounded-lg px-5 py-5 bg-white">
                 <div>
                 <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">Change Password</h2>
                 </div>
@@ -71,10 +64,10 @@ const ChangePassword = () => {
                     :
                     <Message message={message.message} css='flex p-4 mb-4 text-sm text-green-700 bg-green-100 rounded-lg dark:bg-gray-800 dark:text-green-400' />
                     :null}
-                    <button type="button" onClick={ChangePassSubmitHandler} className="group relative flex w-full justify-center rounded-md border border-transparent bg-orange-600 py-2 px-4 text-sm font-medium text-white hover:bg-orange-400 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2">
+                    <button type="submit" className="group relative flex w-full justify-center rounded-md border border-transparent bg-orange-600 py-2 px-4 text-sm font-medium text-white hover:bg-orange-400 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2">
                         Update Password
                     </button>
-            </div>
+            </form>
         </div>
     </>
   )

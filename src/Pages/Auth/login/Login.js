@@ -6,9 +6,7 @@ import { loginvalidationSchemas } from '../../../features/Validation';
 import {Token} from '../../../features/Token'
 import { authFetch } from "../../../Middleware/axios/Interceptors"
 import Message from '../../../features/Message';
-// import img from "../../../Assets/Images/skillabs.png"
-import { CheakLogin } from '../../../features/CheakLogin';
-import jwtDecode from 'jwt-decode';
+import img from "../../../Assets/Images/merchant.jpg"
 
 
 
@@ -18,33 +16,11 @@ const Login = () => {
   const [message,setMessage]=useState({message:'',type:''})
 
 
-  const eye_Password=()=>{
-      if(!showPassword){
-        setShowPassword(true)
-      }else{
-        setShowPassword(false)
-      }
-  }
-
   React.useEffect(() => {
     if(Token()){
-      let decode = jwtDecode(Token())
-    switch (decode.user.role) {
-      case "student":
-        navigate('/auth/student')
-        break;
-      case "mentor":
-        navigate('/auth/mentor')
-        break;
-      case "campus":
-        navigate('/auth/campus')
-        break; 
-      case "enterpricess":
-        navigate('/auth/enterprises')
-        break; 
+      navigate('/auth/dealer')
     }
-    }
-    },[])
+  })
 
   return (
         <>
@@ -72,12 +48,15 @@ const Login = () => {
                  onSubmit={async(values) => {
                   let encodedPassword = base64_encode(values.password);
                   try {
-                    const res = await authFetch.post('login',{
+                    const res = await authFetch.post('/api/merchant/login',{
                       email:values.email,
                       password:encodedPassword,
                     });
                       setMessage({message:res.data.message,type:true})
-                      CheakLogin(res.data)
+                      setTimeout(() => {
+                        localStorage.setItem("token",res.data.token,true)
+                        navigate(`/auth/dealer`)
+                      },1000); 
                     }catch (err) {
                       setMessage({message:err,type:false})
                     }
@@ -97,21 +76,11 @@ const Login = () => {
                     <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
                     <Field type={!showPassword ? "password" : "text"} name='password' id="password" className={`bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5  dark:border-gray-200 dark:placeholder-gray-400 dark:text-gray-900 dark:focus:ring-orange-500 dark:focus:border-orange-500 ${!errors.password ? " " : "border border-red-600 rounded-lg"}`} 
                      onselectstart="return false" onpaste="return false;" onCopy="return false" onCut="return false" onDrag="return false" onDrop="return false" placeholder="Password" />
-                     {/* <span className="flex justify-end pass">{!showPassword ? <i onClick={eye_Password} className="fa-sharp fa-solid fa-eye-slash"></i> : <i onClick={eye_Password} className="fa-solid fa-eye"></i>}</span> */}
                      {errors.password && touched.password ? (
                       <div className='passchnge bg-red-100/80 p-1 px-2 rounded-sm text-red-700 text-xs font-bold'><span><i className="fa-solid fa-triangle-exclamation"></i></span> {errors.password}</div>
                     ) : null}
                 </div> 
                 </div>
-                {/*<div className="flex items-center justify-between">
-                   <div className="flex items-center">
-                  <Field id="remember-me" name="rememberme" type="checkbox" className={`h-4 w-4 rounded border-gray-300 text-orange-600 focus:ring-orange-500 ${!errors.rememberme ? " " : "border-2 border-red-600"}`}/>
-                    <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-900">Remember me</label> 
-                  </div>
-                  <div className="text-sm">
-                    <a href="#" className="font-medium text-orange-600 hover:text-orange-400">Forgot your password?</a>
-                  </div> 
-                </div>*/}
                 {message.type !==''?message.type===false?
                   <Message message={message.message} css='flex p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-gray-800 dark:text-red-400' />
                   :

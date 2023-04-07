@@ -12,7 +12,7 @@ export default function MerchantAddModal({setOpen,open,GetMerchantData}) {
     initialValues: { city:'' },
     onSubmit : async values => {
       try {
-        const resp = await authFetch.post('/api/admin/add-merchant',values);
+        const resp = await authFetch.post('/api/admin/merchant',values);
         setMessage({message:resp.data.message,type:true})
         setTimeout(() => {
           setOpen(false)

@@ -20,12 +20,12 @@ export default function MerchantStatusModal({setOpen,open,id,GetMerchantData}) {
         setMessage({message:'',type:''})
       },1000);
     } catch (error) {
-      console.log(error)
+      setMessage({message:error,type:false})
     }
   }
 
   return (
-    <Transition.Root show={open} as={Fragment}>   
+    <Transition.Root show={open.isOpen} as={Fragment}>   
       <Dialog as="div" className="relative z-10" initialFocus={cancelButtonRef} onClose={setOpen}>
         <Transition.Child
           as={Fragment}

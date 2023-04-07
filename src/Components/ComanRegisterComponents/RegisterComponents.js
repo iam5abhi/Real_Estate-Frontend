@@ -1,14 +1,12 @@
 import React from 'react';
 import { Fragment, useRef } from 'react'
-import {useLocation} from 'react-router-dom'
 import { Dialog, Transition } from '@headlessui/react'
 import Message from '../../features/Message';
 
 const RegisterComponents = ({formik,open,setOpen,message}) => {
-    const location = useLocation()
     const cancelButtonRef = useRef(null)
   return (
-    <Transition.Root show={open} as={Fragment}>   
+    <Transition.Root show={open.isOpen} as={Fragment}>   
     <Dialog as="div" className="relative z-10" initialFocus={cancelButtonRef} onClose={setOpen}>
       <Transition.Child
         as={Fragment}
@@ -47,41 +45,41 @@ const RegisterComponents = ({formik,open,setOpen,message}) => {
                         <form onSubmit={formik.handleSubmit}>
                               <div >
                                 <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name <span class="text-red-600">*</span></label>
-                                <input type="text" name='name' onChange={formik.handleChange} id="name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5" placeholder={location.pathname=="/auth/admin/enterprises"?"Enter Company Name":location.pathname=="/auth/admin/campus"?"Enter Campus Name":'Enter Full Name'}/>
+                                <input type="text" name='name' onChange={formik.handleChange} id="name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5" placeholder='Enter Name' required/>
                               </div>
                               <div className='mt-1'>
                                 <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email <span class="text-red-600">*</span></label>
-                                <input type="text" name='email' onChange={formik.handleChange} id="email" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5" placeholder='Enter Email' />
+                                <input type="text" name='email' onChange={formik.handleChange} id="email" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5" placeholder='Enter Email' required/>
                               </div>
                               <div className='mt-1'>
                                 <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Number <span class="text-red-600">*</span></label>
-                                <input type="text" name='phoneNumber' onChange={formik.handleChange} id="phonenumber" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5" placeholder='Enter Number' />
+                                <input type="text" name='phoneNumber' onChange={formik.handleChange} id="phonenumber" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5" placeholder='Enter Number' required/>
                               </div>
                               <div className='mt-1'>
                                 <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Alternate Number <span class="text-red-600">*</span></label>
-                                <input type="text" name='Alternate_Phone_Number' onChange={formik.handleChange} id="alternatePhoneNumber" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5" placeholder='Enter Alternate Number' />
+                                <input type="text" name='Alternate_Phone_Number' onChange={formik.handleChange} id="alternatePhoneNumber" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5" placeholder='Enter Alternate Number' required/>
                               </div>
                               <div className='grid gap-4 md:grid-cols-2 mt-3'>
                                 <div>
                                   <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Office No <span class="text-red-600">*</span></label>
-                                  <input type="text" name='office' onChange={formik.handleChange} id="office_no" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5" placeholder='Enter Office No' />
+                                  <input type="text" name='office' onChange={formik.handleChange} id="office_no" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5" placeholder='Enter Office No' required/>
                                 </div>
                                 <div>
                                   <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Building Name <span class="text-red-600">*</span></label>
-                                  <input type="text" name='Building' onChange={formik.handleChange} id="building_name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5" placeholder='Enter Building Name' />
+                                  <input type="text" name='Building' onChange={formik.handleChange} id="building_name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5" placeholder='Enter Building Name' required/>
                                 </div>
                                 <div>
                                   <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Sector <span class="text-red-600">*</span></label>
-                                  <input type="text" name='Sector' onChange={formik.handleChange} id="sector" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5" placeholder='Enter Sector' />
+                                  <input type="text" name='Sector' onChange={formik.handleChange} id="sector" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5" placeholder='Enter Sector' required/>
                                 </div>
                                 <div>
                                   <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Pincode <span class="text-red-600">*</span></label>
-                                  <input type="text" name='Pincode' onChange={formik.handleChange} id="pincode" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5" placeholder='Enter Pincode' />
+                                  <input type="text" name='Pincode' onChange={formik.handleChange} id="pincode" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5" placeholder='Enter Pincode' required/>
                                 </div>
                               </div>
                               <div className='mt-1 mb-6'>
                                 <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">GST No <span class="text-red-600">*</span></label>
-                                <input type="text" name='gstNumber' onChange={formik.handleChange} id="GST_No" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5" placeholder='Enter GST No' />
+                                <input type="text" name='gstNumber' onChange={formik.handleChange} id="GST_No" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5" placeholder='Enter GST No' required/>
                               </div>
                               <div className='grid justify-items-center'>
                                 <button type="submit" className="text-white text-end bg-orange-600 hover:bg-orange-400

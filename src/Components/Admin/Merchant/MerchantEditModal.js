@@ -52,7 +52,7 @@ export default function MerchantEditModal({setOpen,open,id,GetMerchantData}) {
   },[id])
 
   return (
-    <Transition.Root show={open} as={Fragment}>   
+    <Transition.Root show={open.isOpen} as={Fragment}>   
     <Dialog as="div" className="relative z-10" initialFocus={cancelButtonRef} onClose={setOpen}>
       <Transition.Child
         as={Fragment}

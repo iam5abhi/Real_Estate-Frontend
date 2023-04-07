@@ -6,14 +6,14 @@ const data = [
         name:"ADMIN",
         path:"/auth/admin/login",
     },
-    // {
-    //     name:"REGISTER",
-    //     path:"/register",
-    // },
-    // {
-    //     name:"LOGIN",
-    //     path:"/login",
-    // }
+    {
+        name:"REGISTER",
+        path:"/register",
+    },
+    {
+        name:"LOGIN",
+        path:"/login",
+    }
 ]
 
 const Home = () => {

@@ -1,32 +1,28 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Route, Routes, Navigate } from 'react-router-dom';
 import Home from './Pages/Home/Home';
+import Header from './Layouts/Header/Header'
 import AdminRouting from './Routes/AdminRouting/AdminRouting';
-
-import { Token } from './features/Token';
-import jwtDecode from 'jwt-decode';
+import MerchantRouting from './Routes/MerchantRouting/MerchantRouting';
 import { useLocation } from 'react-router-dom';
-import ChangePassword from './Pages/Change-Password/ChangePassword';
+import Register from './Pages/Auth/register/Register';
+import Login from './Pages/Auth/login/Login';
+
 
 const Main = () => {
   const location = useLocation()
-  const [decode,setDecode]=useState()
 
-  useEffect(()=>{
-    if(Token()){
-      let decode = jwtDecode(Token())
-      setDecode(decode)
-    }
-  },[Token()])
-  
   return (
     <>
-      {/* <div>{location.pathname.includes('/auth/admin')?null:
-        <Header />}</div> */}
+      {location.pathname.includes('/auth/admin')?null:
+        <Header />}
       <Routes>
         <Route path="/" element={< Home />} />
         <Route path="/auth/admin/*" element={<AdminRouting />} />
-        <Route path="/change-password" element={< ChangePassword />} />
+        <Route path="/auth/dealer/*" element={<MerchantRouting />} />
+        <Route path="/register" element={< Register />} />
+        <Route path="/login" element={< Login />} />
+        <Route path="*" element={ < Navigate to='/auth/dealer' />} ></Route>
       </Routes>
     </>
   )
