@@ -4,8 +4,10 @@ import { Route,Routes,Navigate} from 'react-router-dom';
 import MerchantHome from '../../Pages/Merchant/MerchantHome';
 import ChangePassword from '../../Pages/Change-Password/ChangePassword';
 import PrivateRoute from '../../Middleware/Private Route/PrivateRoute'
+import SubscriptionPlan from '../../Pages/Merchant/SubscriptionPlan/SubscriptionPlan';
+import Leads from '../../Pages/Merchant/Leads/Leads';
 
-const MerchantRouting = () => {
+const MerchantRouting = ({subscriptionData}) => {
 
     const Student = [
         {
@@ -16,10 +18,14 @@ const MerchantRouting = () => {
             path: 'change-password',
             component: ChangePassword,
         },
-        // {
-        //     path: 'view-Project-details/:id',
-        //     component:ProjectDetails,
-        // },
+        {
+            path: 'subscription',
+            component:SubscriptionPlan,
+        },
+        {
+            path: 'leads',
+            component:Leads,
+        }, 
         // {
         //     path: 'quiz',
         //     component:TestQuiz,
@@ -50,7 +56,7 @@ const MerchantRouting = () => {
                 return <Route
                 path={route.path}
                 element={<React.Suspense fallback={<><Breathing width={1200} height={1000} /></>}>
-                <PrivateRoute> <route.component/> </PrivateRoute> </React.Suspense>}/>
+                <PrivateRoute> <route.component subscriptionData={subscriptionData}/> </PrivateRoute> </React.Suspense>}/>
             })
             }
             {/* <Route path='view-profile/:id' element={<React.Suspense fallback={<><Breathing width={1200} height={1000} /></>}>

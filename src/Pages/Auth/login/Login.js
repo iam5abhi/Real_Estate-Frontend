@@ -10,7 +10,7 @@ import img from "../../../Assets/Images/merchant.jpg"
 
 
 
-const Login = () => {
+const Login = ({GetSubscriptionData}) => {
   const navigate =useNavigate()
   const [showPassword,setShowPassword]=React.useState(false)
   const [message,setMessage]=useState({message:'',type:''})
@@ -55,6 +55,7 @@ const Login = () => {
                       setMessage({message:res.data.message,type:true})
                       setTimeout(() => {
                         localStorage.setItem("token",res.data.token,true)
+                        GetSubscriptionData()
                         navigate(`/auth/dealer`)
                       },1000); 
                     }catch (err) {

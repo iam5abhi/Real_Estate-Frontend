@@ -7,33 +7,14 @@ import img from "../../Assets/Images/merchant.jpg"
 import jwt_decode from "jwt-decode";
 
 
-const MentorRoutes = [
+const dealerRoutes = [
     {
-      name:"Project",
-      to:'/auth/mentor/upload-project'
-    },{
-      name:"Request",
-      to:'/auth/mentor/request'
-    },{
-      name:"My Project",
-      to:'/auth/mentor/my-projects' 
+      name:"Subscription",
+      to:'/auth/dealer/subscription'
     },
   ]
 
-const EnterprisesRoutes = [
-  {
-    name:"Upload Project",
-    to:"/auth/enterprises/upload-project"
-  },{
-    name:"Projects",
-    to:"/auth/enterprises/projects"
-  },{
-    name:"My Project",
-    to:'/auth/enterprises/my-projects' 
-  },
-]
-
-const Header = () => {
+const Header = ({subscriptionData,setSubscriptionData}) => {
   const UrlName =useLocation()
   const navigate =useNavigate()
   const [message,setMessage]=useState({message:'',type:false})
@@ -50,10 +31,12 @@ const Header = () => {
   const LogoutHandler =()=>{
     window.localStorage.removeItem('token')
     setMessage({message:'Logout Successfully',type:true})
+    
     setTimeout(() => {
       setDecodeData()
       navigate('/login')
       setMessage(false)
+      setSubscriptionData()
   },2000);
   }
   
@@ -62,7 +45,7 @@ const Header = () => {
       let decode = jwt_decode(Token())
       setDecodeData(decode)
     }
-    },[])
+    },[Token()])
   
 
   return (
@@ -96,7 +79,7 @@ const Header = () => {
                 style={{position: 'absolute', inset:'0px auto auto -49px', margin: 0, transform: 'translate(0px, 62px)'}}> 
                   <div className="bg-gray-100/50 flex pl-2.5 pr-3.5 py-2">
                     <div className="w-10 h-10 relative inline-block	">
-                      <img src={img} alt="User Image" className="rounded-full h-full	w-full object-cover	" />
+                      <img src={img} alt="User Image" className="rounded-full h-full w-full object-cover" />
                     </div>
                     <div className="ml-2.5">
                       <h6 className='mb-0.5 font-medium leading-5 text-base	'>{!decodeData?null:decodeData.user.name.charAt(0).toUpperCase() + decodeData.user.name.slice(1)}</h6>
@@ -125,9 +108,17 @@ const Header = () => {
                     }
                     </>
                     :<>
-                      <li>
-                        <NavLink to="/auth/student" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"><i className="fa-solid fa-gauge fa-2xl text-orange-500"></i></NavLink>
-                      </li>
+                    {dealerRoutes.map((data)=>{
+                      return <li>
+                      <NavLink to={data.to} isActive className={({ isActive }) => !isActive ? "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                        :"block px-4 py-2 text-sm text-gray-700 bg-gray-100 border-b-2 border-orange-500"}>{data.name}</NavLink>
+                    </li>
+                    })} 
+                    {subscriptionData?<li>
+                    <NavLink to='/auth/dealer/leads' isActive className={({ isActive }) => !isActive ? "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      :"block px-4 py-2 text-sm text-gray-700 bg-gray-100 border-b-2 border-orange-500"}>Leads</NavLink>
+                    </li>:null
+                    }
                     </>
                     }
                 </ul>

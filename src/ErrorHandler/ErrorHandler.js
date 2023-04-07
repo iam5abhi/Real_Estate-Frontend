@@ -1,6 +1,5 @@
 
 export const errorhandler =(error)=>{
-    console.log(error.data.message,"error")
     if (error.status === 500) {
         return error.data.message || 'Internal server error';
     }else if (error.status === 502) {
