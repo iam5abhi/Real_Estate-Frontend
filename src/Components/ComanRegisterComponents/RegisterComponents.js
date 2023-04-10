@@ -4,7 +4,8 @@ import { Dialog, Transition } from '@headlessui/react'
 import Message from '../../features/Message';
 
 const RegisterComponents = ({formik,open,setOpen,message}) => {
-    const cancelButtonRef = useRef(null)
+  const cancelButtonRef = useRef(null)
+  
   return (
     <Transition.Root show={open.isOpen} as={Fragment}>   
     <Dialog as="div" className="relative z-10" initialFocus={cancelButtonRef} onClose={setOpen}>
@@ -86,7 +87,7 @@ const RegisterComponents = ({formik,open,setOpen,message}) => {
                                   focus:ring-4 focus:ring-orange-300 font-semibold rounded-full text-lg px-20 py-2.5 mr-2 mb-2 focus:outline-none">Submit</button>
                               </div>
                         </form>
-                      </div>
+                      </div> 
                     </div>
                     {message.type !==''?message.type===false?
                     <Message message={message.message} css='flex p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg'/>

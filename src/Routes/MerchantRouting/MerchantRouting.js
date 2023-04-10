@@ -1,7 +1,7 @@
 import React from 'react';
 import { Breathing } from 'react-shimmer'
 import { Route,Routes,Navigate} from 'react-router-dom';
-import MerchantHome from '../../Pages/Merchant/MerchantHome';
+import MerchantHome from '../../Pages/Merchant/Home/MerchantHome';
 import ChangePassword from '../../Pages/Change-Password/ChangePassword';
 import PrivateRoute from '../../Middleware/Private Route/PrivateRoute'
 import SubscriptionPlan from '../../Pages/Merchant/SubscriptionPlan/SubscriptionPlan';

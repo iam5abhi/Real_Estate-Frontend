@@ -28,16 +28,16 @@ const Header = ({subscriptionData,setSubscriptionData}) => {
       setDropdownIcon(true)
     }
   }
+
   const LogoutHandler =()=>{
     window.localStorage.removeItem('token')
     setMessage({message:'Logout Successfully',type:true})
-    
     setTimeout(() => {
       setDecodeData()
       navigate('/login')
       setMessage(false)
       setSubscriptionData()
-  },2000);
+    },2000);
   }
   
   React.useEffect(() => {
