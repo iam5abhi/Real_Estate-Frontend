@@ -25,6 +25,11 @@ const SubscriptionPlan = () => {
     const [message,setMessage]=useState({message:'',type:''})
     const [subscriptionData,setSubscriptionData]=useState()
 
+    const countdownDateTime = new Date(!subscriptionData?0:subscriptionData.endDate).getTime(); 
+    const currentTime = new Date().getTime();
+    const remainingDayTime = countdownDateTime - currentTime;
+    const totalDays = Math.floor(remainingDayTime / (1000 * 60 * 60 * 24));
+
 
     const SubscriptionSubmit=(data)=>{
         try {
@@ -64,50 +69,31 @@ const SubscriptionPlan = () => {
         :
         <Message message={message.message} css='flex p-4 mb-4 text-sm text-green-700 bg-green-100 rounded-lg' />
         :null}
-        {!subscriptionData?
-        <div className="px-2 py-4 max-w-screen-lg mx-auto">
-            <div className="grid grid-cols-3 gap-4 border border-gray-300/75 rounded px-6  py-6 bg-white shadow">
-                {data.map(datas=>(
-                    <div className="text-center">
-                    <span className="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow-md hover:bg-gray-100">
-                        <h5 className="text-2xl font-bold tracking-tight text-gray-900">{datas.name}</h5>
-                        <h5 className="text-lg text-gray-500">{datas.validity} Month</h5> 
-                        <h5 className="mb-2 text-md text-gray-500">{datas.price} Rs</h5> 
-                        <button type="button" onClick={()=>SubscriptionSubmit(datas)} className="text-white text-end bg-orange-600 hover:bg-orange-400 focus:ring-4 focus:ring-orange-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 focus:outline-none">Buy Plan</button>
-                    </span>
-                    </div>
-                )
-                )}
-            </div> 
-        </div>
-        :
         <div className="m-auto -space-y-4 items-center justify-center md:flex md:space-y-0 md:-space-x-4 xl:w-10/12">
         <div className="p-6 space-y-6 lg:p-8">
-            <h3 className="text-3xl text-gray-700 font-semibold text-center">{subscriptionData.plan}</h3>
+            <h3 className="text-3xl text-gray-700 font-semibold text-center">{!subscriptionData?null:subscriptionData.plan}</h3>
             <div>
             <div className="relative flex justify-around">
                 <div className="flex items-end transition duration-500 hover:scale-105 lg:hover:scale-110">
-                <span className="text-8xl text-gray-800 font-bold leading-0">{subscriptionData.amount}</span>
+                <span className="text-8xl text-gray-800 font-bold leading-0">{!subscriptionData?null:subscriptionData.amount}</span>
                 <div className="pb-2">
-                    <span className="block text-2xl text-gray-700 font-bold hover:animate-spin">$</span>
+                    <span className="block text-2xl text-gray-700 font-bold hover:animate-spin">{!subscriptionData?null:"$"}</span>
                 </div>
                 </div>
             </div>
             </div>
-            <Timer endDate={!subscriptionData?null:subscriptionData.endDate} />
             <ul role="list" className="w-max space-y-4 py-6 m-auto text-gray-600">
             <li className="space-x-2">
-                <span className="text-orange-500 font-semibold">✓</span>
-                <span>First premium advantage</span>
+                <span className="text-red-500 font-semibold"><i class="fa-solid fa-hourglass-end"></i></span>
+                <span className="text-red-500 font-semibold">Left {!subscriptionData?0:totalDays} Days</span>
             </li>
+            {data.map(datas=>(
             <li className="space-x-2">
                 <span className="text-orange-500 font-semibold">✓</span>
-                <span>Second advantage weekly</span>
+                <span>{datas.name} Price: {datas.price} Rs Validity: {datas.validity} month <button type='button' onClick={()=>SubscriptionSubmit(datas)} className="py-1 px-2 rounded-xl bg-orange-500 hover:bg-orange-600 text-white">Buy Plan</button></span>
             </li>
-            <li className="space-x-2">
-                <span className="text-orange-500 font-semibold">✓</span>
-                <span>Third advantage donate to project</span>
-            </li>
+            )
+            )}
             </ul>
             <p className="flex items-center justify-center space-x-4 text-lg text-gray-600 text-center">
             <span>Call us at</span>
@@ -119,14 +105,13 @@ const SubscriptionPlan = () => {
             </a>
             <span>or</span>
             </p>
-            <button type="submit" title="Submit" className="block w-full py-3 px-6 text-center rounded-xl transition bg-orange-500 hover:bg-orange-600 active:bg-orange-700">
+            {/* <button type="submit" title="Submit" className="block w-full py-3 px-6 text-center rounded-xl transition bg-orange-500 hover:bg-orange-600 active:bg-orange-700">
             <span className="text-white font-semibold">
             UPGRADE PLAN
             </span>
-            </button>
+            </button> */}   
         </div>
         </div>
-      }
     </>
   )
 }

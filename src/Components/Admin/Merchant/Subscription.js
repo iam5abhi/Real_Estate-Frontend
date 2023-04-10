@@ -9,11 +9,16 @@ export default function Subscription({ setOpen, open, id, GetMerchantData }) {
   const cancelButtonRef = useRef(null)
   const [message, setMessage] = useState({ message: '', type: '' })
   const [subscriptionData, setSubscriptionData] = useState()
+  const [expireDate, setExpireDate] = useState()
 
+  const countdownDateTime = new Date(!subscriptionData?0:subscriptionData.endDate).getTime(); 
+  const currentTime = new Date().getTime();
+  const remainingDayTime = countdownDateTime - currentTime;
+  const totalDays = Math.floor(remainingDayTime / (1000 * 60 * 60 * 24));
 
   const SubscriptionSubmit = async () => {
     try {
-      const resp = await authFetch.post(`/api/admin/payment/${id}`)
+      const resp = await authFetch.post(`/api/admin/payment/${id}`,expireDate)
       setMessage({ message: resp.data.message, type: true })
       setTimeout(() => {
         setOpen(false)
@@ -64,72 +69,32 @@ export default function Subscription({ setOpen, open, id, GetMerchantData }) {
               leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
             >
               <Dialog.Panel className="relative transform overflow-hidden rounded-xl bg-white text-left shadow-2xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
-                {!subscriptionData ?
                   <div className="max-w-screen mx-auto">
                     <div className="container mx-auto">
-                      <div className="  bg-white border col-span-2">
-                        <div className=" border-b border-gray-200 rounded p-7">
-                          <div className="text-center">
-                            <h3 className='text-2xl font-medium mb-2'>Subscription</h3>
-                            <p className=" text-base font-medium mb-6">
-                              {/* If u delete the question you can't recover it */}
-                            </p>
-                          </div>
-                          <div className="">
-                            <div className="grid grid-cols-2 gap-6">
-                              <button
-                                type="button"
-                                class="bg-transparent hover:bg-orange-500 text-orange-500 font-medium text-lg px-2.5 hover:text-white py-2.5 border border-orange-500 hover:border-transparent rounded-full"
-                                onClick={SubscriptionSubmit}
-                              >
-                                Subscribe
-                              </button>
-                              <button
-                                type="button"
-                                class="bg-transparent hover:bg-orange-500 text-orange-500 font-medium text-lg hover:text-white py-2.5 px-2.5 border border-orange-500 hover:border-transparent rounded-full"
-                                onClick={() => setOpen(false)}
-                                ref={cancelButtonRef}
-                              >
-                                Cancel
-                              </button>
-                            </div>
-                          </div>
-                        </div>
-                        {message.type !== '' ? message.type === false ?
-                          <Message message={message.message} css='flex p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-gray-800 dark:text-red-400' />
-                          :
-                          <Message message={message.message} css='flex p-4 mb-4 text-sm text-green-700 bg-green-100 rounded-lg dark:bg-gray-800 dark:text-green-400' />
-                          : null}
-                      </div>
+                      {message.type !== '' ? message.type === false ?
+                      <Message message={message.message} css='flex p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-gray-800 dark:text-red-400' />
+                      :
+                      <Message message={message.message} css='flex p-4 mb-4 text-sm text-green-700 bg-green-100 rounded-lg dark:bg-gray-800 dark:text-green-400' />
+                      : null}
                     </div>
                   </div>
-                  :
                   <div className="m-auto -space-y-4 items-center justify-center md:flex md:space-y-0 md:-space-x-4 xl:w-10/12">
                     <div className="p-6 space-y-6 lg:p-8">
-                      <h3 className="text-3xl text-gray-700 font-semibold text-center">{subscriptionData.plan}</h3>
+                      <h3 className="text-3xl text-gray-700 font-semibold text-center">{!subscriptionData?null:subscriptionData.plan}</h3>
                       <div>
                         <div className="relative flex justify-around">
                           <div className="flex items-end transition duration-500 hover:scale-105 lg:hover:scale-110">
-                            <span className="text-8xl text-gray-800 font-bold leading-0">{subscriptionData.amount}</span>
+                            <span className="text-8xl text-gray-800 font-bold leading-0">{!subscriptionData?null:subscriptionData.amount}</span>
                             <div className="pb-2">
-                              <span className="block text-2xl text-gray-700 font-bold hover:animate-spin">$</span>
+                              <span className="block text-2xl text-gray-700 font-bold hover:animate-spin">{!subscriptionData?null:"$"}</span>
                             </div>
                           </div>
                         </div>
                       </div>
-                      <Timer endDate={!subscriptionData?null:subscriptionData.endDate} />
                       <ul role="list" className="w-max space-y-4 py-6 m-auto text-gray-600">
                         <li className="space-x-2">
-                          <span className="text-orange-500 font-semibold">✓</span>
-                          <span>First premium advantage</span>
-                        </li>
-                        <li className="space-x-2">
-                          <span className="text-orange-500 font-semibold">✓</span>
-                          <span>Second advantage weekly</span>
-                        </li>
-                        <li className="space-x-2">
-                          <span className="text-orange-500 font-semibold">✓</span>
-                          <span>Third advantage donate to project</span>
+                            <span className="text-red-500 font-semibold"><i class="fa-solid fa-hourglass-end"></i></span>
+                            <span className="text-red-500 font-semibold text-xl">Left {!subscriptionData?0:totalDays} Days</span>
                         </li>
                       </ul>
                       <p className="flex items-center justify-center space-x-4 text-lg text-gray-600 text-center">
@@ -142,14 +107,17 @@ export default function Subscription({ setOpen, open, id, GetMerchantData }) {
                         </a>
                         <span>or</span>
                       </p>
-                      <button type="submit" title="Submit" className="block w-full py-3 px-6 text-center rounded-xl transition bg-orange-500 hover:bg-orange-600 active:bg-orange-700">
-                        <span className="text-white font-semibold">
-                        UPGRADE PLAN
-                        </span>
-                      </button>
+                      <div className="flex space-x-4">
+                        <div>
+                          <label className="text-sm font-medium text-gray-900">Expire Date</label>
+                          <input type="date" onChange={(e)=>setExpireDate(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5" placeholder='Enter Name'/>
+                          </div>
+                        <button type="submit" title="Submit" className="px-2 mt-6 text-center rounded-xl transition bg-orange-500 hover:bg-orange-600 active:bg-orange-700">
+                          <span className="text-white font-semibold"> Add More </span>
+                        </button>
+                      </div>
                     </div>
                   </div>
-                }
               </Dialog.Panel>
             </Transition.Child>
           </div>
