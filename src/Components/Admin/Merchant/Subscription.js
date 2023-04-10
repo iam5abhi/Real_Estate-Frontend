@@ -18,7 +18,7 @@ export default function Subscription({ setOpen, open, id, GetMerchantData }) {
 
   const SubscriptionSubmit = async () => {
     try {
-      const resp = await authFetch.post(`/api/admin/payment/${id}`,expireDate)
+      const resp = await authFetch.post(`/api/admin/payment/${id}`,{expireDate:expireDate})
       setMessage({ message: resp.data.message, type: true })
       setTimeout(() => {
         setOpen(false)
@@ -112,7 +112,7 @@ export default function Subscription({ setOpen, open, id, GetMerchantData }) {
                           <label className="text-sm font-medium text-gray-900">Expire Date</label>
                           <input type="date" onChange={(e)=>setExpireDate(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5" placeholder='Enter Name'/>
                           </div>
-                        <button type="submit" title="Submit" className="px-2 mt-6 text-center rounded-xl transition bg-orange-500 hover:bg-orange-600 active:bg-orange-700">
+                        <button type="button" onClick={SubscriptionSubmit} className="px-2 mt-6 text-center rounded-xl transition bg-orange-500 hover:bg-orange-600 active:bg-orange-700">
                           <span className="text-white font-semibold"> Add More </span>
                         </button>
                       </div>
