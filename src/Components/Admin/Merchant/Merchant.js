@@ -43,7 +43,7 @@ const Merchant = () => {
         { name:  'Sr.', selector: (row,index) => index+1, width:"9rem"},
         { name: 'Name', selector: row => row.name.charAt(0).toUpperCase() + row.name.slice(1), width:"15rem" },
         { name: 'Email', selector: row => row.email, },
-        { name: 'phone Number', selector: row =>row.phoneNumber,},
+        { name: 'Phone Number', selector: row =>row.phoneNumber,},
         { name: 'Status', selector: row => row.status === 'active'?<span className='bg-green-100 p-2 px-4 rounded-full text-green-600'>{row.status}</span>:<span className='bg-red-100 p-2 px-4 rounded-full text-red-600'>{row.status}</span> },
         { name: 'Action', selector: row =><div>
         <button data-tooltip="Edit Merchant Detail" onClick={()=>ModalOpenFuntion("edit",row._id)} type="button" className="px-2 py-1 rounded-full focus:outline-none text-white bg-orange-500 hover:bg-orange-600 focus:ring-orange-300 font-medium text-sm  mr-2 mb-2">

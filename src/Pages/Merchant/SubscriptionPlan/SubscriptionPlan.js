@@ -52,14 +52,13 @@ const SubscriptionPlan = () => {
         try {
             const resp = await authFetch.get(`/api/merchant/suscription`)
             setSubscriptionData(resp.data.data)
-            console.log(resp,"resp")
         } catch (error) {
             // setMessage({ message: error, type: false })
         }
     }
         
     useEffect(() => {
-    GetSubscriptionData()
+        GetSubscriptionData()
     }, [])
 
   return (
