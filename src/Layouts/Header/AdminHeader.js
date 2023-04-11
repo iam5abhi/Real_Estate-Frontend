@@ -19,7 +19,10 @@ const AdminHeader = () => {
     {
       name:"Merchant",
       to:"/auth/admin/merchants"
-    }
+    },{
+      name:"Property",
+      to:'/auth/admin/property'
+    },
   ] 
   
   const navigate = useNavigate()

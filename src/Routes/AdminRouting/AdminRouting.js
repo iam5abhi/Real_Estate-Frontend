@@ -6,6 +6,7 @@ import Dashboard from '../../Pages/Admin/Dashboard/Dashboard';
 import AdminPrivateRoute from '../../Middleware/Private Route/AdminPrivateRoute'
 import AdminChangePass from '../../Pages/Change-Password/AdminChangePass';
 import Merchant from '../../Components/Admin/Merchant/Merchant';
+import Property from '../../Pages/Admin/Property/Property';
 
 
 const AdminRouting = () => {
@@ -22,7 +23,10 @@ const AdminRouting = () => {
     {
       path:'change-password',
       component:AdminChangePass
-    },
+    },{
+      path:'property',
+      component:Property
+    }, 
   ]
 
   return (
