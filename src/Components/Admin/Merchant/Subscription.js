@@ -94,7 +94,7 @@ export default function Subscription({ setOpen, open, id, GetMerchantData }) {
                       <ul role="list" className="w-max space-y-4 py-6 m-auto text-gray-600">
                         <li className="space-x-2">
                             <span className="text-red-500 font-semibold"><i class="fa-solid fa-hourglass-end"></i></span>
-                            <span className="text-red-500 font-semibold text-xl">Left {!subscriptionData?0:totalDays} Days</span>
+                            <span className="text-red-500 font-semibold text-xl">Left {!subscriptionData?0:totalDays} Days {!subscriptionData?null:totalDays <= 10?<span class="badge">Trial</span>:null }</span>
                         </li>
                       </ul>
                       <p className="flex items-center justify-center space-x-4 text-lg text-gray-600 text-center">
