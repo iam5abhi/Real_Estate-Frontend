@@ -99,7 +99,7 @@ export default function MerchantEditModal({setOpen,open,id,GetMerchantData}) {
                               </div>
                               <div className='mt-1'>
                                 <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Number <span class="text-red-600">*</span></label>
-                                <input type="text" name='phoneNumber' value={merchantData.phoneNumber}  onChange={EditChangeHandler} id="phonenumber" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5" placeholder='Enter Number' />
+                                <input type="text" name='phoneNumber' value={merchantData.phoneNumber} onChange={EditChangeHandler} id="phonenumber" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5" placeholder='Enter Number' />
                               </div>
                               <div className='mt-1'>
                                 <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Alternate Number <span class="text-red-600">*</span></label>

@@ -57,7 +57,7 @@ export default function PropertyStatusModal({setOpen,open,id,GetPropertyData}) {
                       <div className="text-end p-2">
                         <i onClick={() => setOpen(false)} className="fa-solid fa-xmark text-xs font-extrabold bg-gray-400 h-5 leading-5 w-5 z-50 rounded-full text-center text-white"></i>
                       </div>
-                      <Dialog.Title as="h2" className=" text-xl text-center font-semibold">
+                      <Dialog.Title as="h2" className="text-xl text-center font-semibold">
                         Status
                       </Dialog.Title>  
                       <div className="container w-11/15 mx-auto px-4 bg-white rounded ">

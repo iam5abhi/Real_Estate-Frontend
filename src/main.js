@@ -8,6 +8,9 @@ import { useLocation } from 'react-router-dom';
 import Register from './Pages/Auth/register/Register';
 import Login from './Pages/Auth/login/Login';
 import { authFetch } from './Middleware/axios/intance';
+import AllProperty from './Pages/Property/AllProperty';
+import SingleProperty from './Pages/Property/SingleProperty';
+import Test from './TestHandler/Test';
 
 
 const Main = () => {
@@ -38,7 +41,10 @@ const Main = () => {
         <Route path="/auth/dealer/*" element={<MerchantRouting subscriptionData={subscriptionData} />} />
         <Route path="/register" element={< Register />} />
         <Route path="/login" element={< Login GetSubscriptionData={GetSubscriptionData}/>} />
+        <Route path="/property" element={< AllProperty />} />
+        <Route path="/property-details/:id" element={< SingleProperty />} />
         <Route path="*" element={ < Navigate to='/auth/dealer' />} ></Route>
+        <Route path="/test" element={< Test />} />
       </Routes>
     </>
   )
