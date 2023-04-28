@@ -11,7 +11,10 @@ const dealerRoutes = [
     {
       name:"Subscription",
       to:'/auth/dealer/subscription'
-    }
+    },{
+      name:"Property",
+      to:'/auth/dealer/property'
+    } 
   ]
 
 const Header = ({subscriptionData,setSubscriptionData}) => {

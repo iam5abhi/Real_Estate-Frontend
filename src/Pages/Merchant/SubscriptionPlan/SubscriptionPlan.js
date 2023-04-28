@@ -89,7 +89,11 @@ const SubscriptionPlan = () => {
             {data.map(datas=>(
             <li className="space-x-2">
                 <span className="text-orange-500 font-semibold">✓</span>
-                <span>{datas.name} Price: {datas.price} Rs Validity: {datas.validity} month <button type='button' onClick={()=>SubscriptionSubmit(datas)} className="py-1 px-2 rounded-xl bg-orange-500 hover:bg-orange-600 text-white">Buy Plan</button></span>
+                <span>{datas.name} Price: {datas.price} Rs Validity: {datas.validity} month 
+                {!subscriptionData?null:subscriptionData.plan==datas.name?<> &nbsp;<span className='text-white bg-green-600  rounded-lg px-2 py-1'>Current Pack</span> </>
+                : <> &nbsp;<button type='button' onClick={()=>SubscriptionSubmit(datas)} className="py-1 px-2 rounded-xl bg-orange-500 hover:bg-orange-600 text-white">Buy Plan</button></>
+                }
+                </span>
             </li>
             )
             )}

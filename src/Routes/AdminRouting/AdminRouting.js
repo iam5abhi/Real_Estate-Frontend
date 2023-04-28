@@ -7,6 +7,8 @@ import AdminPrivateRoute from '../../Middleware/Private Route/AdminPrivateRoute'
 import AdminChangePass from '../../Pages/Change-Password/AdminChangePass';
 import Merchant from '../../Components/Admin/Merchant/Merchant';
 import Property from '../../Pages/Admin/Property/Property';
+import Leads from '../../Pages/Admin/Leads/Leads';
+import SinglePropertieDetail from '../../Pages/Admin/Property/SinglePropertieDetail';
 
 
 const AdminRouting = () => {
@@ -26,7 +28,13 @@ const AdminRouting = () => {
     },{
       path:'property',
       component:Property
-    }, 
+    },{
+      path:'leads',
+      component:Leads
+    },{
+      path:'property-detail/:id',
+      component:SinglePropertieDetail
+    },
   ]
 
   return (

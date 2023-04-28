@@ -6,6 +6,7 @@ import ChangePassword from '../../Pages/Change-Password/ChangePassword';
 import PrivateRoute from '../../Middleware/Private Route/PrivateRoute'
 import SubscriptionPlan from '../../Pages/Merchant/SubscriptionPlan/SubscriptionPlan';
 import Leads from '../../Pages/Merchant/Leads/Leads';
+import AllProperty from '../../Pages/Merchant/Property/AllProperty';
 
 const MerchantRouting = ({subscriptionData}) => {
 
@@ -26,10 +27,10 @@ const MerchantRouting = ({subscriptionData}) => {
             path: 'leads',
             component:Leads,
         }, 
-        // {
-        //     path: 'quiz',
-        //     component:TestQuiz,
-        // },
+        {
+            path: 'property',
+            component:AllProperty,
+        },
         // {
         //     path: 'quiz-terms',
         //     component:Quiz_Terms,
