@@ -33,18 +33,37 @@ const SubscriptionPlan = () => {
 
     const SubscriptionSubmit=(data)=>{
         try {
-            const resp = authFetch.post('/api/merchant/suscription',{
+            const resp = authFetch.patch('/api/merchant/suscription',{
                 amount:data.price,
                 plan:data.name,
                 month:data.validity
             });
-            setMessage({message:resp.data.message,type:true})
+            GetSubscriptionData()
+            setMessage({message:'Buy Suscription Successfully',type:true})
             setTimeout(() => {
               setMessage({message:'',type:''})
             },1000);
           } catch (error) {
             console.log(error)
-            // setMessage({message:error,type:false})
+            setMessage({message:error,type:false})
+        }
+    }
+
+    const UpgradeSubscription=(data)=>{
+        try {
+            const resp = authFetch.patch('/api/merchant/upgrade-suscription-plan',{
+                amount:data.price,
+                plan:data.name,
+                month:data.validity
+            });
+            GetSubscriptionData()
+            setMessage({message:"Upgrade Suscription Successfully",type:true})
+            setTimeout(() => {
+              setMessage({message:'',type:''})
+            },1000);
+          } catch (error) {
+            console.log(error)
+            setMessage({message:error,type:false}) 
         }
     }
 
@@ -53,7 +72,7 @@ const SubscriptionPlan = () => {
             const resp = await authFetch.get(`/api/merchant/suscription`)
             setSubscriptionData(resp.data.data)
         } catch (error) {
-            // setMessage({ message: error, type: false })
+            setMessage({ message: error, type: false })
         }
     }
         
@@ -90,8 +109,9 @@ const SubscriptionPlan = () => {
             <li className="space-x-2">
                 <span className="text-orange-500 font-semibold">✓</span>
                 <span>{datas.name} Price: {datas.price} Rs Validity: {datas.validity} month 
-                {!subscriptionData?null:subscriptionData.plan==datas.name?<> &nbsp;<span className='text-white bg-green-600  rounded-lg px-2 py-1'>Current Pack</span> </>
-                : <> &nbsp;<button type='button' onClick={()=>SubscriptionSubmit(datas)} className="py-1 px-2 rounded-xl bg-orange-500 hover:bg-orange-600 text-white">Buy Plan</button></>
+                {!subscriptionData?<> &nbsp;<button type='button' onClick={()=>SubscriptionSubmit(datas)} className="py-1 px-2 rounded-xl bg-orange-500 hover:bg-orange-600 text-white"> Buy Plan</button></>
+                :subscriptionData.plan==datas.name?<> &nbsp;<span className='text-white bg-green-600  rounded-lg px-2 py-1'>Current Pack</span> </>
+                : <> &nbsp;<button type='button' onClick={()=>UpgradeSubscription(datas)} className="py-1 px-2 rounded-xl bg-orange-500 hover:bg-orange-600 text-white"> Upgrade Plan </button></>
                 }
                 </span>
             </li>

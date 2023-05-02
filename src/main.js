@@ -11,6 +11,7 @@ import { authFetch } from './Middleware/axios/intance';
 import AllProperty from './Pages/Property/AllProperty';
 import SingleProperty from './Pages/Property/SingleProperty';
 import Test from './TestHandler/Test';
+import Apartment from './Pages/Apartment/Apartment';
 
 
 const Main = () => {
@@ -43,6 +44,7 @@ const Main = () => {
         <Route path="/login" element={< Login GetSubscriptionData={GetSubscriptionData}/>} />
         <Route path="/property" element={< AllProperty />} />
         <Route path="/property-details/:id" element={< SingleProperty />} />
+        <Route path="/apartment" element={< Apartment />} />
         <Route path="*" element={ < Navigate to='/auth/dealer' />} ></Route>
         <Route path="/test" element={< Test />} />
       </Routes>

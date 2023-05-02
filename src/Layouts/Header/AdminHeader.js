@@ -25,6 +25,9 @@ const AdminHeader = () => {
     },{
       name:"Leads",
       to:'/auth/admin/leads'
+    },{
+      name:"Apartment",
+      to:'/auth/admin/apartment'
     },
   ] 
   

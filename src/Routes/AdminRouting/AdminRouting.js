@@ -9,6 +9,7 @@ import Merchant from '../../Components/Admin/Merchant/Merchant';
 import Property from '../../Pages/Admin/Property/Property';
 import Leads from '../../Pages/Admin/Leads/Leads';
 import SinglePropertieDetail from '../../Pages/Admin/Property/SinglePropertieDetail';
+import Apartment from '../../Pages/Admin/Apartment/Apartment';
 
 
 const AdminRouting = () => {
@@ -34,6 +35,9 @@ const AdminRouting = () => {
     },{
       path:'property-detail/:id',
       component:SinglePropertieDetail
+    },{
+      path:'apartment',
+      component:Apartment
     },
   ]
 

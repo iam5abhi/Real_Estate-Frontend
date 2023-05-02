@@ -12,7 +12,17 @@ const AllProperty = () => {
     const SubscriptionHandler = async (id) => {
         try {
             const resp = await authFetch.patch(`/api/merchant/subscribe-product/${id}`);
-            setMessage({ message: "Applied Successfully", type: true })
+            setMessage({ message: "Subscribe Successfully", type: true })
+            GetPropertyData()
+        } catch (error) {
+            setMessage({ message: error, type: false })
+        }
+    }
+
+    const UnSubscriptionHandler = async (id) => {
+        try {
+            const resp = await authFetch.patch(`/api/merchant/unsubscribe-product/${id}`);
+            setMessage({ message: "Unsubscribe Successfully", type: false })
             GetPropertyData()
         } catch (error) {
             setMessage({ message: error, type: false })
@@ -51,7 +61,7 @@ const AllProperty = () => {
                         <h5 className="mb-4 text-2xl font-bold tracking-tight text-gray-900">{datas.description}</h5>
                         {!datas.MerchantId?
                         <button type="button" onClick={()=>SubscriptionHandler(datas._id)} className="text-white text-end bg-orange-600 hover:bg-orange-400 focus:ring-4 focus:ring-orange-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 focus:outline-none">Subscribe</button>
-                        :<button type="button" className="text-white text-end bg-green-600 hover:bg-green-400 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 focus:outline-none">Applied</button>}
+                        :<button type="button" onClick={()=>UnSubscriptionHandler(datas._id)} className="text-white text-end bg-red-600 hover:bg-red-400 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 focus:outline-none">Unsubscribe</button>}
                     </span>
                     </div>
                 )
