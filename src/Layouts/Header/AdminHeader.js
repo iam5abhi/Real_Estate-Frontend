@@ -20,15 +20,15 @@ const AdminHeader = () => {
       name:"Merchant",
       to:"/auth/admin/merchants"
     },{
-      name:"Property",
-      to:'/auth/admin/property'
-    },{
       name:"Leads",
       to:'/auth/admin/leads'
     },{
-      name:"Apartment",
-      to:'/auth/admin/apartment'
-    },
+      name:"Property",
+      to:'/auth/admin/property'
+    },{
+      name:"Projects",
+      to:'/auth/admin/projects'
+    }, 
   ] 
   
   const navigate = useNavigate()

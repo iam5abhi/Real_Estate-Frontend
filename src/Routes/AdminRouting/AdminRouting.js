@@ -10,6 +10,9 @@ import Property from '../../Pages/Admin/Property/Property';
 import Leads from '../../Pages/Admin/Leads/Leads';
 import SinglePropertieDetail from '../../Pages/Admin/Property/SinglePropertieDetail';
 import Apartment from '../../Pages/Admin/Apartment/Apartment';
+import Projects from '../../Pages/Admin/Projects/Projects';
+import AddProjects from '../../Pages/Admin/Projects/AddProjects';
+import EditProjects from '../../Pages/Admin/Projects/EditProjects';
 
 
 const AdminRouting = () => {
@@ -27,18 +30,24 @@ const AdminRouting = () => {
       path:'change-password',
       component:AdminChangePass
     },{
-      path:'property',
-      component:Property
-    },{
       path:'leads',
       component:Leads
     },{
       path:'property-detail/:id',
       component:SinglePropertieDetail
     },{
-      path:'apartment',
+      path:'property',
       component:Apartment
-    },
+    },{
+      path:'projects',
+      component:Projects
+    },{
+      path:'add-project',
+      component:AddProjects
+    },{
+      path:'edit-project/:id',
+      component:EditProjects
+    }, 
   ]
 
   return (

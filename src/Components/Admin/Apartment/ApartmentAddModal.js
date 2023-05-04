@@ -74,7 +74,7 @@ export default function ApartmentAddModal({ setOpen, open, GetPropertyData }) {
                         <div className="text-end p-2">
                           <i onClick={() => setOpen(false)} className="fa-solid fa-xmark text-xs font-extrabold bg-gray-400 h-5 leading-5 w-5 z-50 rounded-full text-center text-white"></i>
                         </div>
-                        <Dialog.Title as="h2" className=" text-xl text-center font-semibold">Add Apartment</Dialog.Title>
+                        <Dialog.Title as="h2" className=" text-xl text-center font-semibold">Add Property</Dialog.Title>
                         <div className="overflow-auto">
                           <div className="container w-11/15 mx-auto px-3 bg-white rounded  ">
                             <div className="relative flex flex-col flex-auto min-w-0 p-4 break-words border-0 shadow-blur rounded-2xl bg-white/80 bg-clip-border mb-2 draggable " draggable="true">
