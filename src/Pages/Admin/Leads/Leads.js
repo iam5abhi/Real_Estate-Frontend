@@ -25,8 +25,8 @@ const Leads = () => {
     const GetPropertyData = async () => {
         try {
             const resp = await authFetch('/api/admin/get-all-leads');
-            setLeadData(resp.data.data)
-            setDisplayLead(resp.data.data)
+            setLeadData(resp.data)
+            setDisplayLead(resp.data)
         } catch (error) {
             setMessage({ message: error, type: false })
         }
@@ -59,7 +59,7 @@ const Leads = () => {
                                 <thead>
                                     <tr>
                                         <th className="pl-14 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
-                                            <i className="fa-solid fa-user"></i> Property Name
+                                            <i className="fa-solid fa-user"></i> Property Type
                                         </th>
                                         <th className="py-3 border-b-2 text-center border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
                                             <i className="fa-solid fa-user"></i> Client Name
@@ -74,9 +74,10 @@ const Leads = () => {
                                 </thead>
                                 <tbody>
                                     {!displayLead ? null : displayLead.map((data) => {
-                                        return <tr>
+                                       return data.Project.map((item)=>{
+                                            return <tr>
                                             <td className="pl-14 py-5 border-b border-gray-200 bg-white text-sm">
-                                                <p onClick={ ()=>navigate(`/auth/admin/property-detail/${data.ProductId._id}`) } className="text-blue-500 whitespace-no-wrap cursor-pointer">{data.ProductId.title}</p>
+                                                <p onClick={ ()=>navigate(`/auth/admin/property-detail/${item._id}`) } className="text-blue-500 whitespace-no-wrap cursor-pointer">{item.propertyname}</p>
                                             </td>
                                             <td className="px-4 py-5 border-b border-gray-200 text-center bg-white text-sm">
                                                 <p className="text-gray-900 whitespace-no-wrap">{data.name}</p>
@@ -95,7 +96,8 @@ const Leads = () => {
                                                     <span className="relative"><i className="fa-solid fa-link fa-sm"></i> Url</span>
                                                 </button>
                                             </td> */}
-                                        </tr>
+                                       </tr>   
+                                        })
                                     })}
                                 </tbody>
                             </table>

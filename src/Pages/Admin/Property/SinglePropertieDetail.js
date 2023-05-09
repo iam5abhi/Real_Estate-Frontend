@@ -12,8 +12,8 @@ const SinglePropertieDetail = () => {
 
     const getSinglePropertiesData = async () => {
         try {
-            const resp = await authFetch(`http://localhost:7000/api/admin/project/${id}`);
-            setPropertyData(resp.data.data)
+            const resp = await authFetch(`/api/admin/project/${id}`);
+            setPropertyData(resp.data)
         } catch (error) {
         }
     }
@@ -38,10 +38,14 @@ const SinglePropertieDetail = () => {
             <section className="w-full md:w-2/3 flex flex-col items-center px-3">
                 <article className="flex flex-col shadow my-4">
                     <div className="bg-white flex flex-col justify-start p-6">
-                        <a href="#" className="text-3xl text-gray-800 font-bold pb-4">{!propertyData?null:propertyData.title}</a>
-                        <p href="#" className="text-sm pb-1">
-                            <a href="#" className="font-semibold">{!propertyData?null:propertyData.title}</a>
-                        </p>
+                        {!propertyData?null:propertyData.map((data)=>{
+                            return data.property.map((item)=>{
+                                return <><a href="#" className="text-3xl text-gray-800 font-bold pb-4">{item.project_name}</a>
+                                <p href="#" className="text-sm pb-1">
+                                    <a href="#" className="font-semibold">{!propertyData?null:propertyData.title}</a>
+                                </p> </>
+                            })
+                        })}
                         <p href="#" className="text-sm pb-3">
                             <a href="#" className="font-normal text-gray-500 "><i className="fa-solid fa-location-dot" />&nbsp;Sector 65,
                                 Mohali</a>

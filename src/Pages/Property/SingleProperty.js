@@ -34,7 +34,7 @@ const SingleProperty = () => {
                 <section className="border border-gray-200 rounded-lg px-4 py-10">
                     <div className="grid grid-cols-2 gap-20  ">
                     <div>
-                        <h2 className=" text-start text-3xl font-bold tracking-tight text-gray-900">{!propertyData?<Breathing width={800} height={100} />:propertyData.title.toUpperCase()}</h2>
+                        <h2 className=" text-start text-3xl font-bold tracking-tight text-gray-900">{!propertyData?<Breathing width={800} height={100} />:propertyData.PropertId.project_name.toUpperCase()} <span className='text-xl font-normal text-gray-600'>({!propertyData?null:propertyData.PropertId.location})</span></h2>
                     </div>
                     <div className="text-end">
                     <button type="button" onClick={()=>''} className="text-white text-end bg-orange-600 hover:bg-orange-400 focus:ring-4 focus:ring-orange-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-orange-600 dark:hover:bg-orange-700 focus:outline-none dark:focus:ring-orange-800">Enquire Now</button> 
@@ -43,7 +43,9 @@ const SingleProperty = () => {
                     <br />
                     <div>
                     <h3 className='text-start text-2xl font-bold tracking-tight text-gray-900 mb-6 underline'>Property Description</h3>  
-                    <p className="break-word mt-2 mb-2 max-w-screen-md text-lg text-gray-600 leading-6">{!propertyData?<Breathing width={1200} height={1000} />:propertyData.description}</p>
+                        <p className="break-word mt-2 mb-2 max-w-screen-md text-lg text-gray-600 leading-6">Property Type : {!propertyData?<Breathing width={1200} height={1000} />:propertyData.propertytype}</p>
+                        <p className="break-word mt-2 mb-2 max-w-screen-md text-lg text-gray-600 leading-6">Property Name : {!propertyData?<Breathing width={1200} height={1000} />:propertyData.propertyname}</p>
+                        <p className="break-word mt-2 mb-2 max-w-screen-md text-lg text-gray-600 leading-6">BHK : {!propertyData?<Breathing width={1200} height={1000} />:propertyData.propertybhk}</p>
                     </div>
                 </section>
                 </div>

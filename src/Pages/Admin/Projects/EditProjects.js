@@ -99,7 +99,6 @@ const EditProjects = () => {
                       {!propertyData?null:propertyData.map((data)=>{
                         return <option value={data._id}>{data.project_name}</option>
                       })}
-                      
                     </select>
                  </div>
                  {/* {formData.project_name?
