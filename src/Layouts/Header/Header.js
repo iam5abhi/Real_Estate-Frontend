@@ -14,7 +14,10 @@ const dealerRoutes = [
     },{
       name:"Property",
       to:'/auth/dealer/property'
-    } 
+    },{
+      name:"Leads New",
+      to:'/auth/dealer/test'
+    },  
   ]
 
 const Header = ({subscriptionData,setSubscriptionData}) => {

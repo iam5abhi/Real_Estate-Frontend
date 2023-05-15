@@ -13,19 +13,19 @@ const Leads = () => {
                             <thead>
                                 <tr>
                                     <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
-                                    <i className="fa-solid fa-user"></i> User Name
+                                        <i className="fa-solid fa-user"></i> User Name
                                     </th>
                                     <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
-                                    <i className="fa-solid fa-envelope"></i> User Email
+                                        <i className="fa-solid fa-envelope"></i> User Email
                                     </th>
                                     <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
-                                    <i className="fa-solid fa-phone"></i> User Number
+                                        <i className="fa-solid fa-phone"></i> User Number
                                     </th>
                                     <th className="px-1 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
-                                    <i className="fa-solid fa-location-dot"></i> User Location
+                                        <i className="fa-solid fa-location-dot"></i> User Location
                                     </th>
                                     <th className="py-3 border-b-2 border-gray-200 bg-gray-100 text-xs font-semibold text-gray-700 uppercase tracking-wider">
-                                    <i className="fa-solid fa-location-arrow"></i> Action
+                                        <i className="fa-solid fa-location-arrow"></i> Action
                                     </th>
                                 </tr>
                             </thead>
@@ -76,7 +76,7 @@ const Leads = () => {
                                     <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                                         <p className="text-gray-900 whitespace-no-wrap">molly@gmail.com</p>
                                     </td>
-                                    <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                    <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">                                                                 
                                         <p className="text-gray-900 whitespace-no-wrap">9878586947</p>
                                     </td>
                                     <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
@@ -152,7 +152,6 @@ const Leads = () => {
                 </div>
             </div>
         </div>
-
     )
 }
 

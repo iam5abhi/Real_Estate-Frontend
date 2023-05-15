@@ -7,6 +7,7 @@ import PrivateRoute from '../../Middleware/Private Route/PrivateRoute'
 import SubscriptionPlan from '../../Pages/Merchant/SubscriptionPlan/SubscriptionPlan';
 import Leads from '../../Pages/Merchant/Leads/Leads';
 import AllProperty from '../../Pages/Merchant/Property/AllProperty';
+import Text from '../../Pages/Merchant/Leads New/Text';
 
 const MerchantRouting = ({subscriptionData}) => {
 
@@ -31,10 +32,10 @@ const MerchantRouting = ({subscriptionData}) => {
             path: 'property',
             component:AllProperty,
         },
-        // {
-        //     path: 'quiz-terms',
-        //     component:Quiz_Terms,
-        // },
+        {
+            path: 'test',
+            component:Text,
+        },
         // {
         //     path: 'track-progress',
         //     component:Myproject,

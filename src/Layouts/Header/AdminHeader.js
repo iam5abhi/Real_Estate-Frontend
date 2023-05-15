@@ -28,7 +28,7 @@ const AdminHeader = () => {
     },{
       name:"Projects",
       to:'/auth/admin/projects'
-    }, 
+    },  
   ] 
   
   const navigate = useNavigate()
