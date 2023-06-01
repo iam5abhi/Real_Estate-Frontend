@@ -7,7 +7,9 @@ import PrivateRoute from '../../Middleware/Private Route/PrivateRoute'
 import SubscriptionPlan from '../../Pages/Merchant/SubscriptionPlan/SubscriptionPlan';
 import Leads from '../../Pages/Merchant/Leads/Leads';
 import AllProperty from '../../Pages/Merchant/Property/AllProperty';
-import Text from '../../Pages/Merchant/Leads New/Text';
+import Text from '../../Pages/Merchant/CRM/Text';
+import AddCrm from '../../Pages/Merchant/CRM/AddCrm';
+import EditCrm from '../../Pages/Merchant/CRM/EditCrm';
 
 const MerchantRouting = ({subscriptionData}) => {
 
@@ -33,17 +35,17 @@ const MerchantRouting = ({subscriptionData}) => {
             component:AllProperty,
         },
         {
-            path: 'test',
+            path: 'crm',
             component:Text,
         },
-        // {
-        //     path: 'track-progress',
-        //     component:Myproject,
-        // },
-        // {
-        //     path: 'profile/*',
-        //     component:Student_Profile,
-        // },
+        {
+            path: 'add-crm',
+            component:AddCrm,
+        },
+        {
+            path: 'edit-crm/:id',
+            component:EditCrm,
+        },
         // {
         //     path: 'upload-assignment/:id',
         //     component:UploadAssignment,

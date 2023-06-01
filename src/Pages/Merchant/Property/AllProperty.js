@@ -2,9 +2,12 @@ import React, { useState, useEffect } from 'react'
 import { authFetch } from '../../../Middleware/axios/intance'
 import Message from '../../../features/Message'
 import { useNavigate } from 'react-router-dom'
+import { Token } from '../../../features/Token'
+import jwt_decode from 'jwt-decode'
 
 const AllProperty = () => {
     const navigate = useNavigate()
+    let {user} = jwt_decode(Token())
     const [message, setMessage] = useState({ message: '', type: '' })
     const [propertyData, setPropertyData] = useState()
 
@@ -54,8 +57,9 @@ const AllProperty = () => {
             : null}
         <div className="px-2 py-4 max-w-screen-xl mx-auto">
             <div className="grid grid-cols-3 gap-4 rounded px-6 py-6">
-                {!propertyData?null:propertyData.map(datas=>(
-                    <div className="text-center">
+                {!propertyData?null:propertyData.map((datas)=>{
+                    let mentorData = datas.MerchantId.find(data=>data==user._id)
+                    return <div className="text-center">
                     <span className="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow-md hover:bg-gray-100">
                         <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900">{datas.PropertId.project_name}</h5>
                         <h5 className="mb-4 text-2xl font-bold tracking-tight text-gray-900">{datas.PropertId.location}</h5>
@@ -65,12 +69,12 @@ const AllProperty = () => {
                         <h5 className="text-lg tracking-tight text-gray-600">{datas.propertybhk}</h5>
                         </div>
                         
-                        {!datas.MerchantId?
-                        <button type="button" onClick={()=>SubscriptionHandler(datas._id)} className="text-white text-end bg-orange-600 hover:bg-orange-400 focus:ring-4 focus:ring-orange-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 focus:outline-none">Subscribe</button>
-                        :<button type="button" onClick={()=>UnSubscriptionHandler(datas._id)} className="text-white text-end bg-red-600 hover:bg-red-400 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 focus:outline-none">Unsubscribe</button>}
+                        {datas.MerchantId.length==0?<button type="button" onClick={()=>SubscriptionHandler(datas._id)} className="text-white text-end bg-orange-600 hover:bg-orange-400 focus:ring-4 focus:ring-orange-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 focus:outline-none">Subscribe</button>
+                        :mentorData==user._id?<button type="button" onClick={()=>UnSubscriptionHandler(datas._id)} className="text-white text-end bg-red-600 hover:bg-red-400 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 focus:outline-none">Unsubscribe</button>
+                        :<button type="button" onClick={()=>SubscriptionHandler(datas._id)} className="text-white text-end bg-orange-600 hover:bg-orange-400 focus:ring-4 focus:ring-orange-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 focus:outline-none">Subscribe</button>}
                     </span>
                     </div>
-                )
+                }
                 )}
             </div> 
         </div>

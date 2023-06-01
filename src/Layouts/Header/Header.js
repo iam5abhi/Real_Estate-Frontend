@@ -15,8 +15,8 @@ const dealerRoutes = [
       name:"Property",
       to:'/auth/dealer/property'
     },{
-      name:"Leads New",
-      to:'/auth/dealer/test'
+      name:"CRM",
+      to:'/auth/dealer/crm'
     },  
   ]
 

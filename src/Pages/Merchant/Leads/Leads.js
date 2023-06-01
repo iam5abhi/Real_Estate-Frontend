@@ -1,6 +1,21 @@
-import React from 'react'
+import React,{useEffect,useState} from 'react';
+import { authFetch } from '../../../Middleware/axios/intance';
 
 const Leads = () => {
+    const [leadsData, setLeadsData] = useState()
+
+    const GetLeadsData = async () => {
+        try {
+            const resp = await authFetch('/api/merchant/client-query-information');
+            setLeadsData(resp.data)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    useEffect(() => {
+        GetLeadsData()
+    }, [])
     return (
         <div className="container mx-auto px-4 sm:px-8">
             <div className="py-8">
@@ -13,139 +28,46 @@ const Leads = () => {
                             <thead>
                                 <tr>
                                     <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                                        <i className="fa-solid fa-location-arrow"></i> Property Name
+                                    </th>
+                                    <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
                                         <i className="fa-solid fa-user"></i> User Name
                                     </th>
                                     <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
                                         <i className="fa-solid fa-envelope"></i> User Email
                                     </th>
-                                    <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                                    <th className="py-3 border-b-2 border-gray-200 bg-gray-100 text-xs font-semibold text-gray-700 uppercase tracking-wider">
                                         <i className="fa-solid fa-phone"></i> User Number
                                     </th>
-                                    <th className="px-1 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
-                                        <i className="fa-solid fa-location-dot"></i> User Location
-                                    </th>
-                                    <th className="py-3 border-b-2 border-gray-200 bg-gray-100 text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                                    {/* <th className="py-3 border-b-2 border-gray-200 bg-gray-100 text-xs font-semibold text-gray-700 uppercase tracking-wider">
                                         <i className="fa-solid fa-location-arrow"></i> Action
-                                    </th>
+                                    </th> */}
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                        <div className="flex">
-                                            <div className="flex-shrink-0 w-10 h-10">
-                                                <img className="w-full h-full rounded-full" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.2&w=160&h=160&q=80" alt />
-                                            </div>
-                                            <div className="ml-3">
-                                                <p className="text-gray-900 whitespace-no-wrap">
-                                                    Molly Sanders
-                                                </p>
-                                                <p className="text-gray-600 whitespace-no-wrap">000004</p>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                        <p className="text-gray-900 whitespace-no-wrap">molly@gmail.com</p>
-                                    </td>
-                                    <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                        <p className="text-gray-900 whitespace-no-wrap">9878586947</p>
-                                    </td>
-                                    <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                        <p className="text-gray-900 whitespace-no-wrap">Mohali</p>
-                                    </td>
-                                    <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm text-center">
-                                        <button type="button" className="px-3 py-1 font-semibold inset-0 bg-orange-200 rounded-full leading-tight">
-                                            <span className="relative"><i className="fa-solid fa-eye fa-xs"></i> View</span>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                        <div className="flex">
-                                            <div className="flex-shrink-0 w-10 h-10">
-                                                <img className="w-full h-full rounded-full" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.2&w=160&h=160&q=80" alt />
-                                            </div>
-                                            <div className="ml-3">
-                                                <p className="text-gray-900 whitespace-no-wrap">
-                                                    Michael Roberts
-                                                </p>
-                                                <p className="text-gray-600 whitespace-no-wrap">000003</p>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                        <p className="text-gray-900 whitespace-no-wrap">molly@gmail.com</p>
-                                    </td>
-                                    <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">                                                                 
-                                        <p className="text-gray-900 whitespace-no-wrap">9878586947</p>
-                                    </td>
-                                    <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                        <p className="text-gray-900 whitespace-no-wrap">Mohali</p>
-                                    </td>
-                                    <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm text-center">
-                                        <button type="button" className="px-3 py-1 font-semibold inset-0 bg-orange-200 rounded-full leading-tight">
-                                            <span className="relative"><i className="fa-solid fa-eye fa-xs"></i> View</span>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                        <div className="flex">
-                                            <div className="flex-shrink-0 w-10 h-10">
-                                                <img className="w-full h-full rounded-full" src="https://images.unsplash.com/photo-1540845511934-7721dd7adec3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.2&w=160&h=160&q=80" alt />
-                                            </div>
-                                            <div className="ml-3">
-                                                <p className="text-gray-900 whitespace-no-wrap">
-                                                    Devin Childs
-                                                </p>
-                                                <p className="text-gray-600 whitespace-no-wrap">000002</p>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                        <p className="text-gray-900 whitespace-no-wrap">molly@gmail.com</p>
-                                    </td>
-                                    <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                        <p className="text-gray-900 whitespace-no-wrap">9878586947</p>
-                                    </td>
-                                    <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                        <p className="text-gray-900 whitespace-no-wrap">Mohali</p>
-                                    </td>
-                                    <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm text-center">
-                                        <button type="button" className="px-3 py-1 font-semibold inset-0 bg-orange-200 rounded-full leading-tight">
-                                            <span className="relative"><i className="fa-solid fa-eye fa-xs"></i> View</span>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td className="px-5 py-5 bg-white text-sm">
-                                        <div className="flex">
-                                            <div className="flex-shrink-0 w-10 h-10">
-                                                <img className="w-full h-full rounded-full" src="https://images.unsplash.com/photo-1522609925277-66fea332c575?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.2&h=160&w=160&q=80" alt />
-                                            </div>
-                                            <div className="ml-3">
-                                                <p className="text-gray-900 whitespace-no-wrap">
-                                                    Frederick Nicholas
-                                                </p>
-                                                <p className="text-gray-600 whitespace-no-wrap">000001</p>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                        <p className="text-gray-900 whitespace-no-wrap">molly@gmail.com</p>
-                                    </td>
-                                    <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                        <p className="text-gray-900 whitespace-no-wrap">9878586947</p>
-                                    </td>
-                                    <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                        <p className="text-gray-900 whitespace-no-wrap">Mohali</p>
-                                    </td>
-                                    <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm text-center">
-                                        <button type="button" className="px-3 py-1 font-semibold inset-0 bg-orange-200 rounded-full leading-tight">
-                                            <span className="relative"><i className="fa-solid fa-eye fa-xs"></i> View</span>
-                                        </button>
-                                    </td>
-                                </tr>
+                                {!leadsData?null:leadsData.map((data)=>{
+                                    return data.Projects.map((item)=>{
+                                        return <tr>
+                                            <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                            <p className="text-blue-500 font-semibold whitespace-no-wrap">{item.propertyname}</p>
+                                            </td>
+                                            <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                                <p className="text-gray-900 whitespace-no-wrap">{data.name}</p>
+                                            </td>
+                                            <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                                <p className="text-gray-900 whitespace-no-wrap">{data.email}</p>
+                                            </td>
+                                            <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm text-center">
+                                                <p className="text-gray-900 whitespace-no-wrap">{data.phoneNumber}</p>
+                                            </td>
+                                            {/* <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm text-center">
+                                                <button type="button" className="px-3 py-1 font-semibold inset-0 bg-orange-200 rounded-full leading-tight">
+                                                    <span className="relative"><i className="fa-solid fa-eye fa-xs"></i> View</span>
+                                                </button>
+                                            </td> */}
+                                        </tr>
+                                    })
+                                })}
                             </tbody>
                         </table>
                     </div>
